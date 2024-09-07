@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useGetVideos = (APIURL)=>{
+const useGetVideos = (APIURL,dependency=null)=>{
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
@@ -10,7 +10,7 @@ const useGetVideos = (APIURL)=>{
           setVideos(data?.items)
         }
         getVideos()
-      }, [])
+      }, [dependency])
 
       return { videos }
 }

@@ -1,9 +1,20 @@
+import { useDispatch } from "react-redux"
+import { toggleSidebar } from "../store/sidebarSlice"
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 const Header = () => {
+    const dispatch = useDispatch()
+    const [userInput, setUserInput] = useState('');
+    const navigate = useNavigate()
+
+    function handleSearch(){
+      navigate('/search?search_param='+userInput)
+    }
     return (
         <div className="flex justify-between pt-4 pb-1 px-4 items-center">
             <div className="flex gap-4">
-                <div className="h-9 w-9">
+                <div className="h-9 w-9 cursor-pointer" onClick={() => dispatch(toggleSidebar())}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         height={24}
@@ -22,7 +33,7 @@ const Header = () => {
                     </svg>
 
                 </div>
-                <div className="h-9 w-24">
+                <Link to="/" className="h-9 w-24 cursor-pointer">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         id="yt-logo-updated-svg_yt6"
@@ -66,12 +77,12 @@ const Header = () => {
                             </g>
                         </svg>
                     </svg>
-                </div>
+                </Link>
 
             </div>
             <div className="border border-1 rounded-full">
-                <input className="w-[500px] border border-1 py-2 px-2 rounded-s-full" type="text" name="search" id="search" placeholder="Search" />
-                <button className="py-2 px-2">search</button>
+                <input className="w-[500px] border border-1 py-2 px-2 rounded-s-full" type="text" name="search" id="search" placeholder="Search" onChange={(e)=>setUserInput(e.target.value)} />
+                <button className={`py-2 px-2 ${userInput.trim().length===0?'cursor-not-allowed':''}`} disabled={userInput.trim().length===0} onClick={handleSearch}>search</button>
             </div>
             <div>
                 <img className="h-8" src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" />

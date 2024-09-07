@@ -1,34 +1,39 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import VideoContainer from "./components/VideoContainer";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
 import WatchVideo from "./components/WatchVideo";
-import Header from "./components/Header";
-
+import MainContainer from "./components/MainContainer";
+import { Provider } from "react-redux";
+import store from "./store";
+import Layout from "./components/Layout";
+import SearchContainer from "./components/SearchContainer";
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <VideoContainer />
-  },
-  {
-    path: 'watch',
-    element: <WatchVideo />
+    element: <Layout />,
+    children: [
+      {
+        path: '/',
+        element: <MainContainer />
+      },
+      {
+        path: 'watch',
+        element: <WatchVideo />
+      },
+      {
+        path: 'search',
+        element: <SearchContainer />
+      }
+    ]
   }
 ])
 
 
-function Layout(){
-   return(
-    <RouterProvider router={router}>
-    </RouterProvider>
-
-   )
-}
-
 function App() {
   return (
-    <>
-      <Header />
-      <Layout />
-    </>
+    <Provider store={store}>
+      <RouterProvider router={router}>
+        <Outlet />
+      </RouterProvider>
+    </Provider>
   )
 }
 
