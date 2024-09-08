@@ -9,7 +9,8 @@ const Header = () => {
     const navigate = useNavigate()
 
     function handleSearch(){
-      navigate('/search?search_param='+userInput)
+      let searchParam = userInput.replace(/%20/g, "");
+      navigate('/search?search_param='+searchParam)
     }
     return (
         <div className="flex justify-between pt-4 pb-1 px-4 items-center">

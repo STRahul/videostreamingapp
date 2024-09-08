@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 
-const useGetVideos = (APIURL,dependency=null)=>{
-    const [videos, setVideos] = useState([]);
+const useGetData = (APIURL,dependency=null)=>{
+    const [responseData, setResponseData] = useState([]);
 
     useEffect(() => {
         async function getVideos() {
           const response = await fetch(APIURL);
           const data = await response.json();
-          setVideos(data?.items)
+          setResponseData(data?.items)
         }
         getVideos()
       }, [dependency])
 
-      return { videos }
+      return { data: responseData }
 }
 
-export default useGetVideos;
+export default useGetData;
