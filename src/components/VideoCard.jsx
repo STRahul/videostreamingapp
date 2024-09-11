@@ -5,14 +5,14 @@ const VideoCard = ({video}) => {
   return (
     <div className="flex flex-col gap-5 p-2 m-2">
           <div>
-            <img src={video?.snippet?.thumbnails?.medium?.url} />
+            <img className="rounded-lg" src={video?.snippet?.thumbnails?.medium?.url} />
           </div>
           <div className="flex gap-5">
             <div className="h-10 w-10 mt-2 rounded-full">
               <img className="object-contain" src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" />
             </div>
             <div>
-              <div className=" p-1 font-bold line-clamp-2">
+              <div className=" p-1 font-bold line-clamp-2 w-[300px]">
                 <h1>{video?.snippet?.title}</h1>
               </div>
               <div>

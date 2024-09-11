@@ -1,12 +1,13 @@
 import VideoCard from "./VideoCard"
 import { APIURL } from "../utils/constant";
 import useGetData from "../hooks/useGetData";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 const VideoContainer = () => {
   const [searchParams] = useSearchParams()
+  const location = useLocation();
   const v = searchParams.get('v')
   let url = APIURL;
-  if(v!==null){
+  if(v!==null && location.pathname !=='/watch' ){
      url += '&videoCategoryId='+v
   }
   const { data: videos } = useGetData(url,v);
