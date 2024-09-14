@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom"
 import VideoContainer from "./VideoContainer"
 import WatchVideoDetails from "./WatchVideoDetails"
+import CommentContainer from "./CommentContainer"
 
 const WatchVideo = () => {
     const [searchParams] = useSearchParams()
@@ -21,6 +22,7 @@ const WatchVideo = () => {
                     />
                 </div>
                 <WatchVideoDetails videoId={v} />
+                <CommentContainer videoId={v} />
             </div>
             <div className="w-[30%] px-6 py-2">
                 <VideoContainer />

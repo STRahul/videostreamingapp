@@ -12,8 +12,7 @@ const WatchVideoDetails = ({videoId}) => {
     const {data: channelInfo} = useGetData(CHANNEL_INFO_API+"&id="+ videoData?.snippet?.channelId, videoData?.snippet?.channelId)
     const channelData = channelInfo?.[0]
 
-   console.log(videoDetails)
-  return (
+    return (
     <div>
       <div>
         <h1 className="font-semibold text-lg">{videoData?.snippet?.title}</h1>

@@ -10,6 +10,9 @@ export const SEACHAPIURL = 'https://youtube.googleapis.com/youtube/v3/search?par
 export const CHANNEL_INFO_API = "https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&key=" + key
 export const VIDEO_DETAILS_API = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=" + key;
 
+export const COMMENTS_API_URL =
+  "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&key="+key+"&maxResults=100";
+
 export const sidebarLinks = [
     {
         icons: IoMdHome,
