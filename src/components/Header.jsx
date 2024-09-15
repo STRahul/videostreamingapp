@@ -1,17 +1,30 @@
 import { useDispatch } from "react-redux"
 import { toggleSidebar } from "../store/sidebarSlice"
 import { Link, useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { SUGGESSION_API_URL } from "../utils/constant"
 
 const Header = () => {
+    const [suggestion, setSuggestion] = useState([])
     const dispatch = useDispatch()
     const [userInput, setUserInput] = useState('');
     const navigate = useNavigate()
 
-    function handleSearch(){
-      let searchParam = userInput.replace(/%20/g, "");
-      navigate('/search?search_param='+searchParam)
+    function handleSearch() {
+        let searchParam = userInput.replace(/%20/g, "");
+        navigate('/search?search_param=' + searchParam)
     }
+
+    useEffect(() => {
+
+        async function getSuggestions() {
+            const response = await fetch(SUGGESSION_API_URL + userInput)
+            const data = await response.json()
+            setSuggestion(data[1])
+        }
+
+        getSuggestions()
+    }, [userInput])
     return (
         <div className="flex justify-between pt-4 pb-1 px-4 items-center">
             <div className="flex gap-4">
@@ -82,8 +95,20 @@ const Header = () => {
 
             </div>
             <div className="border border-1 rounded-full">
-                <input className="w-[500px] border border-1 py-2 px-2 rounded-s-full" type="text" name="search" id="search" placeholder="Search" onChange={(e)=>setUserInput(e.target.value)} />
-                <button className={`py-2 px-2 ${userInput.trim().length===0?'cursor-not-allowed':''}`} disabled={userInput.trim().length===0} onClick={handleSearch}>search</button>
+                <input className="w-[500px] border border-1 py-2 px-2 rounded-s-full" type="text" name="search" id="search" placeholder="Search" onChange={(e) => setUserInput(e.target.value)} />
+                <button className={`py-2 px-2 ${userInput.trim().length === 0 ? 'cursor-not-allowed' : ''}`} disabled={userInput.trim().length === 0} onClick={handleSearch}>search</button>
+                {
+                    suggestion?.length > 0 && 
+                    <div className="absolute bg-white py-1 w-[500px] border rounded-lg">
+                        <ul>
+                            {
+                                suggestion?.map(s => 
+                                    <li className="py-1 px-6 cursor-pointer hover:bg-gray-200">{s}</li>
+                                )
+                            }
+                        </ul>
+                        </div>
+                }
             </div>
             <div>
                 <img className="h-8" src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" />

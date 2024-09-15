@@ -5,8 +5,10 @@ import { AiOutlineLike } from "react-icons/ai";
 import { AiOutlineDislike } from "react-icons/ai";
 import { PiShareFatThin } from "react-icons/pi";
 import { HiDownload } from "react-icons/hi";
+import { useState } from "react";
 
 const WatchVideoDetails = ({videoId}) => {
+    const [showMore, setShowMore] = useState(false);
     const {data: videoDetails} = useGetData(VIDEO_DETAILS_API+"&id="+ videoId, videoId)
     const videoData  = videoDetails[0]
     const {data: channelInfo} = useGetData(CHANNEL_INFO_API+"&id="+ videoData?.snippet?.channelId, videoData?.snippet?.channelId)
@@ -50,7 +52,13 @@ const WatchVideoDetails = ({videoId}) => {
           <span>{formatDate(videoData?.snippet?.publishedAt)}</span>
         </div>
         <div className="pb-3">
-          <p>{videoData?.snippet?.description}</p>
+          <p className={!showMore ? 'line-clamp-3': 'line-clamp-none'}>{videoData?.snippet?.description}</p>
+          <div className="font-medium">
+            {
+              showMore? <button onClick={()=>setShowMore(false)}>Show less</button>:
+              <button onClick={()=>setShowMore(true)}>...more</button>
+            }
+          </div>
         </div>
       </div>
       <div className="my-4">

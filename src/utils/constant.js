@@ -11,8 +11,9 @@ export const CHANNEL_INFO_API = "https://youtube.googleapis.com/youtube/v3/chann
 export const VIDEO_DETAILS_API = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=" + key;
 
 export const COMMENTS_API_URL =
-  "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&key="+key+"&maxResults=100";
-
+    "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&key=" + key + "&maxResults=100";
+export const SUGGESSION_API_URL =
+    "https://cors-proxy.fringe.zone/https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q="
 export const sidebarLinks = [
     {
         icons: IoMdHome,
